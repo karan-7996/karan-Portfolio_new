@@ -234,6 +234,13 @@ html, body {
   background-size: cover;
   background-position: center top;
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.08);
+  filter: grayscale(100%) contrast(1.06);
+  transition: filter .38s cubic-bezier(.2,.8,.2,1);
+}
+
+.badge:hover .card .ph,
+.badge .card .ph:hover {
+  filter: grayscale(0%) contrast(1);
 }
 
 .badge .card .row {
@@ -328,6 +335,8 @@ html, body {
   width: 100%;
   height: 100%;
   opacity: 0;
+  z-index: 0;
+  pointer-events: none;
   display: flex;
   flex-direction: column;
   background: #0b1411;
@@ -337,12 +346,26 @@ html, body {
   gap: 14px;
 }
 
+.screen .case-slide.is-active {
+  z-index: 2;
+}
+
+.screen .case-slide.is-live-slide {
+  padding: 10px 12px 12px;
+  gap: 10px;
+}
+
 .cs-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   padding-bottom: 12px;
   border-bottom: 1px solid rgba(255,255,255,.1);
+}
+
+.case-slide.is-live-slide .cs-bar {
+  padding-bottom: 8px;
 }
 
 .cs-dots {
@@ -382,6 +405,75 @@ html, body {
   background: #9fd8bf;
   padding: 4px 10px;
   border-radius: 3px;
+}
+
+.cs-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-url-link {
+  color: rgba(255,255,255,.82);
+  text-decoration: none;
+}
+
+.cs-url-link:hover {
+  color: #cfeee0;
+  text-decoration: underline;
+}
+
+.cs-open-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: #0b2f20;
+  background: #cfeee0;
+  padding: 4px 10px;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background-color .2s ease;
+}
+
+.cs-open-btn:hover {
+  background: #fff;
+}
+
+.cs-iframe-wrap {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.12);
+  background: #0f281d;
+}
+
+.cs-iframe-loading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: rgba(207,238,224,.7);
+  pointer-events: none;
+}
+
+.cs-iframe {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+  background: #fff;
 }
 
 .cs-grid {
@@ -703,6 +795,388 @@ html, body {
   color: #cfeee0;
 }
 
+/* Parking SaaS Bay Grid */
+.cs-park-wrap {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+
+.cs-bays {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.cs-bay {
+  border-radius: 5px;
+  padding: 10px 8px;
+  border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.04);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cs-bay b {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.cs-bay span {
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.cs-bay.avail { border-color: rgba(159,216,191,.45); background: rgba(159,216,191,.12); color: #cfeee0; }
+.cs-bay.occ { border-color: rgba(255,255,255,.1); background: rgba(255,255,255,.03); color: rgba(255,255,255,.55); }
+.cs-bay.ev { border-color: rgba(102,187,106,.55); background: rgba(102,187,106,.16); color: #b9f6ca; }
+.cs-bay.vip { border-color: rgba(255,202,40,.45); background: rgba(255,202,40,.12); color: #ffe082; }
+
+/* CRM Pipeline Columns */
+.cs-crm-cols {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  min-height: 0;
+}
+
+.cs-crm-col {
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 6px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cs-crm-col-h {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10.5px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: #9fd8bf;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.cs-deal {
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 4px;
+  padding: 8px 9px;
+}
+
+.cs-deal strong {
+  display: block;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #fff;
+}
+
+.cs-deal span {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+  color: rgba(255,255,255,.58);
+}
+
+/* HRMS Attendance & Payroll */
+.cs-hrms-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 14px;
+  min-height: 0;
+}
+
+.cs-prog {
+  height: 8px;
+  border-radius: 99px;
+  background: rgba(255,255,255,.1);
+  overflow: hidden;
+  margin-top: 8px;
+}
+
+.cs-prog i {
+  display: block;
+  height: 100%;
+  width: 88%;
+  background: linear-gradient(90deg, #1a5a40, #9fd8bf);
+}
+
+.cs-shift-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,.07);
+  font-size: 11.5px;
+}
+
+/* Language Breakdown Bar & 3D / Portfolio Showcases */
+.cs-lang-card {
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.09);
+  border-radius: 6px;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cs-lang-bar {
+  height: 9px;
+  border-radius: 99px;
+  overflow: hidden;
+  display: flex;
+  background: rgba(255,255,255,.08);
+  gap: 2px;
+}
+
+.cs-lang-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,.85);
+}
+
+.cs-lang-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cs-lang-legend i {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.cs-3d-stage {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+
+.cs-3d-viewport {
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid rgba(159,216,191,.22);
+  background: radial-gradient(circle at 50% 42%, #194b35 0%, #091711 76%);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.cs-3d-grid-floor {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  bottom: -24px;
+  height: 150px;
+  background-image:
+    linear-gradient(to right, rgba(159,216,191,.16) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(159,216,191,.16) 1px, transparent 1px);
+  background-size: 28px 28px;
+  transform: perspective(260px) rotateX(62deg);
+  pointer-events: none;
+}
+
+.cs-3d-rig {
+  position: relative;
+  margin: auto;
+  width: 150px;
+  height: 150px;
+  display: grid;
+  place-items: center;
+}
+
+.cs-3d-ring {
+  position: absolute;
+  inset: 10px;
+  border-radius: 50%;
+  border: 2px dashed rgba(159,216,191,.45);
+}
+
+.case-slide.is-active .cs-3d-ring {
+  animation: spin3d 14s linear infinite;
+}
+
+.cs-3d-cube {
+  width: 78px;
+  height: 78px;
+  border: 2px solid #cfeee0;
+  background: rgba(159,216,191,.14);
+  box-shadow: 0 0 28px rgba(159,216,191,.25);
+  transform: rotate(22deg) skew(-8deg);
+  display: grid;
+  place-items: center;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  color: #fff;
+}
+
+@keyframes spin3d {
+  to { transform: rotate(360deg); }
+}
+
+.cs-port-stage {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+
+.cs-mini-hero {
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,.12);
+  background: linear-gradient(180deg, #0c3523 0%, #14503a 58%, #9fd8bf 100%);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.cs-mini-tags {
+  display: flex;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.cs-mini-tags span {
+  background: #fff;
+  color: #0d0f0e;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 3px 8px;
+  box-shadow: 0 2px 0 rgba(0,0,0,.2);
+}
+
+.cs-mini-wm {
+  font-size: 38px;
+  font-weight: 900;
+  letter-spacing: -.04em;
+  line-height: .9;
+  text-align: center;
+  background: linear-gradient(180deg, #fff 0%, rgba(255,255,255,.32) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.cs-aw-stage {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.32fr 1fr;
+  gap: 14px;
+  min-height: 0;
+}
+
+.cs-aw-hero {
+  border-radius: 6px;
+  border: 1px solid rgba(159,216,191,.22);
+  background: linear-gradient(145deg, #103b29 0%, #19593e 56%, #267050 100%);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+.cs-aw-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: rgba(255,255,255,.78);
+}
+
+.cs-aw-nav-links {
+  display: flex;
+  gap: 10px;
+}
+
+.cs-aw-nav-links span.on {
+  color: #0b2f20;
+  background: #cfeee0;
+  padding: 2px 8px;
+  border-radius: 3px;
+}
+
+.cs-aw-copy h3 {
+  margin: 0;
+  font-size: 27px;
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  color: #fff;
+}
+
+.cs-aw-copy p {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(237,245,241,.86);
+}
+
+.cs-aw-ctas {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.cs-aw-cta {
+  padding: 7px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  background: #fff;
+  color: #0b2f20;
+}
+
+.cs-aw-cta.ghost {
+  background: rgba(255,255,255,.12);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.26);
+}
+
+.cs-aw-foot {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #cfeee0;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,.14);
+}
+
 .screen::after {
   content: '';
   position: absolute;
@@ -734,6 +1208,18 @@ html, body {
 
 body.is-case .screen-hit {
   display: block;
+}
+
+body.is-case.has-live .screen {
+  pointer-events: auto;
+}
+
+body.is-case.has-live .case-slide.is-active {
+  pointer-events: auto;
+}
+
+body.is-case.has-live .screen-hit {
+  display: none;
 }
 
 /* Viewport-pinned UI */
@@ -937,6 +1423,43 @@ body.busy .hint {
   font-weight: 700;
   color: rgba(255,255,255,.7);
   opacity: 0;
+}
+
+.desc .case-link {
+  display: inline-flex;
+  align-items: center;
+  gap: calc(6 * var(--n));
+  margin-top: calc(14 * var(--n));
+  padding: calc(7 * var(--n)) calc(12 * var(--n));
+  background: #fff;
+  color: var(--ink);
+  font-size: calc(12 * var(--n));
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-decoration: none;
+  box-shadow: 0 calc(3 * var(--n)) 0 rgba(0,0,0,.22);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform .2s ease, background-color .2s ease;
+}
+
+.desc .case-link[hidden] {
+  display: none;
+}
+
+body.is-case:not(.busy) .desc .case-link:not([hidden]) {
+  pointer-events: auto;
+}
+
+.desc .case-link:hover {
+  background: var(--mint);
+  transform: translateY(calc(-2 * var(--n)));
+}
+
+.desc .case-link svg {
+  width: calc(12 * var(--n));
+  height: calc(12 * var(--n));
+  flex-shrink: 0;
 }
 
 .nav-case {
@@ -1187,6 +1710,19 @@ body.is-case .nav-case.prev.dim {
     display: none;
   }
 
+  .desc .case-link {
+    margin-top: 10px;
+    padding: 6px 12px;
+    font-size: 12px;
+    gap: 5px;
+    box-shadow: 0 3px 0 rgba(0,0,0,.22);
+  }
+
+  .desc .case-link svg {
+    width: 12px;
+    height: 12px;
+  }
+
   .nav-case {
     bottom: calc(env(safe-area-inset-bottom, 0px) + 2.2vh);
     flex-direction: row;
@@ -1320,6 +1856,12 @@ body.is-case .nav-case.prev.dim {
   background: #eef2f0;
   border: 1px solid rgba(0,0,0,.08);
   flex-shrink: 0;
+  filter: grayscale(100%) contrast(1.06);
+  transition: filter .35s cubic-bezier(.2,.8,.2,1);
+}
+
+.m-avatar:hover {
+  filter: grayscale(0%) contrast(1);
 }
 
 .m-head h2 {
@@ -1476,6 +2018,17 @@ body.is-case .nav-case.prev.dim {
   text-decoration: underline;
 }
 
+.m-proj-link {
+  color: var(--green-800);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.m-proj-link:hover {
+  color: var(--ink);
+}
+
 @media (max-width: 640px) {
   .modal-card {
     padding: 26px 20px 24px;
@@ -1509,7 +2062,7 @@ body.is-case .nav-case.prev.dim {
       <div class="card">
         <h4>DEVELOPER<br>CARD</h4>
         <span class="yr">2026</span>
-        <div class="role">LARAVEL // FULL STACK DEV</div>
+        <div class="role">ERP • CRM • HRMS • PARKING SAAS</div>
         <div class="ph"></div>
         <div class="row"><span>NAME</span><b>KARANSINH PADHIYAR</b></div>
         <div class="row"><span>EXP</span><b>5+ YRS FULL STACK</b></div>
@@ -1522,21 +2075,110 @@ body.is-case .nav-case.prev.dim {
     <video class="trans" muted playsinline preload="auto" crossorigin="anonymous"></video>
     <img class="caseplate" alt="" decoding="async">
     <div class="screen">
-      <!-- Case 1: ERP System Modules -->
+      <!-- Case 1: SAAS (Parking Management) -->
       <div class="case-slide" data-case="0">
         <div class="cs-bar">
           <div class="cs-dots"><i></i><i></i><i></i></div>
-          <div class="cs-url">erp.pirotantechnolabs.internal/admin/workflows</div>
-          <div class="cs-pill">Laravel 11 • Filament</div>
+          <div class="cs-url">app.ronspot-parking.io/zones/hq-lot-a</div>
+          <div class="cs-pill">SaaS • Parking Management</div>
+        </div>
+        <div class="cs-kpis">
+          <div class="cs-kpi"><small>Live Occupancy</small><strong>91.4%</strong></div>
+          <div class="cs-kpi"><small>EV &amp; VIP Bays</small><strong>148 Slots</strong></div>
+          <div class="cs-kpi"><small>Platform Scale</small><strong>Multi-Tenant</strong></div>
+        </div>
+        <div class="cs-park-wrap">
+          <div class="cs-panel">
+            <div class="cs-panel-head">
+              <span>Live Parking Bay Allocation — Lot A</span>
+              <span class="cs-badge">AngularJS + Livewire</span>
+            </div>
+            <div class="cs-bays">
+              <div class="cs-bay occ"><b>P-01</b><span>Occupied</span></div>
+              <div class="cs-bay avail"><b>P-02</b><span>Available</span></div>
+              <div class="cs-bay ev"><b>EV-03</b><span>Charging</span></div>
+              <div class="cs-bay vip"><b>VIP-04</b><span>Reserved</span></div>
+              <div class="cs-bay occ"><b>P-05</b><span>Occupied</span></div>
+              <div class="cs-bay occ"><b>P-06</b><span>Occupied</span></div>
+              <div class="cs-bay avail"><b>P-07</b><span>Available</span></div>
+              <div class="cs-bay ev"><b>EV-08</b><span>EV Ready</span></div>
+              <div class="cs-bay occ"><b>P-09</b><span>Occupied</span></div>
+              <div class="cs-bay vip"><b>VIP-10</b><span>Exec Bay</span></div>
+              <div class="cs-bay occ"><b>P-11</b><span>Occupied</span></div>
+              <div class="cs-bay avail"><b>P-12</b><span>Available</span></div>
+            </div>
+          </div>
+          <div class="cs-panel">
+            <div class="cs-panel-head">
+              <span>AG-Grid Gate &amp; Pass Feed</span>
+              <span class="cs-badge">QR / ANPR Sync</span>
+            </div>
+            <table class="cs-table">
+              <thead><tr><th>Bay</th><th>Pass Type</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>EV-03</td><td>QR Mobile Pass</td><td><span class="cs-badge">Checked In</span></td></tr>
+                <tr><td>VIP-04</td><td>Tenant Reserve</td><td><span class="cs-badge">Allocated</span></td></tr>
+                <tr><td>P-02</td><td>Flex Daily Slot</td><td><span class="cs-badge">Open</span></td></tr>
+                <tr><td>EV-08</td><td>Fast Charger</td><td><span class="cs-badge">Synced</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 2: CRM Platform -->
+      <div class="case-slide" data-case="1">
+        <div class="cs-bar">
+          <div class="cs-dots"><i></i><i></i><i></i></div>
+          <div class="cs-url">crm.enterprise-ops.io/pipeline/deals</div>
+          <div class="cs-pill">CRM • Laravel &amp; React.js</div>
+        </div>
+        <div class="cs-kpis">
+          <div class="cs-kpi"><small>Active Pipeline</small><strong>$482,000</strong></div>
+          <div class="cs-kpi"><small>Lead Conversion</small><strong>34.8%</strong></div>
+          <div class="cs-kpi"><small>REST Webhooks</small><strong>Real-Time</strong></div>
+        </div>
+        <div class="cs-crm-cols">
+          <div class="cs-crm-col">
+            <div class="cs-crm-col-h"><span>Qualified</span><span>14</span></div>
+            <div class="cs-deal"><strong>Acme Logistics</strong><span>$42k • ERP Suite</span></div>
+            <div class="cs-deal"><strong>Metro Park Corp</strong><span>$28k • Parking SaaS</span></div>
+            <div class="cs-deal"><strong>Zenith Retail</strong><span>$19k • API SDK</span></div>
+          </div>
+          <div class="cs-crm-col">
+            <div class="cs-crm-col-h"><span>Proposal</span><span>09</span></div>
+            <div class="cs-deal"><strong>Apex Hospitality</strong><span>$64k • PMS + QR</span></div>
+            <div class="cs-deal"><strong>Crest FinTech</strong><span>$51k • Custom CRM</span></div>
+            <div class="cs-deal"><strong>Nova Healthcare</strong><span>$36k • HRMS Portal</span></div>
+          </div>
+          <div class="cs-crm-col">
+            <div class="cs-crm-col-h"><span>Negotiation</span><span>05</span></div>
+            <div class="cs-deal"><strong>Pirotan Group</strong><span>$85k • Laravel 11</span></div>
+            <div class="cs-deal"><strong>Skyline Fleet</strong><span>$44k • Multi-Site</span></div>
+          </div>
+          <div class="cs-crm-col">
+            <div class="cs-crm-col-h"><span>Closed Won</span><span>18</span></div>
+            <div class="cs-deal"><strong>Alendei Commerce</strong><span>$72k • Checkout</span></div>
+            <div class="cs-deal"><strong>Westgate Resort</strong><span>$41k • Deployed</span></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 3: ERP System -->
+      <div class="case-slide" data-case="2">
+        <div class="cs-bar">
+          <div class="cs-dots"><i></i><i></i><i></i></div>
+          <div class="cs-url">erp.pirotantechnolabs.internal/modules/core</div>
+          <div class="cs-pill">ERP • Laravel 11 &amp; Filament</div>
         </div>
         <div class="cs-grid">
           <div class="cs-side">
             <div class="cs-side-title">ERP Modules</div>
-            <div class="cs-nav-item on">HR Workflows <span>12</span></div>
-            <div class="cs-nav-item">Inventory Stock <span>48</span></div>
-            <div class="cs-nav-item">RBAC &amp; Policies <span>08</span></div>
+            <div class="cs-nav-item on">Inventory &amp; Stock <span>48</span></div>
+            <div class="cs-nav-item">Procurement <span>16</span></div>
+            <div class="cs-nav-item">Billing &amp; GST <span>94</span></div>
+            <div class="cs-nav-item">RBAC Policies <span>08</span></div>
             <div class="cs-nav-item">Audit Trails <span>Live</span></div>
-            <div class="cs-nav-item">AI Automation <span>Beta</span></div>
           </div>
           <div class="cs-main">
             <div class="cs-kpis">
@@ -1546,22 +2188,22 @@ body.is-case .nav-case.prev.dim {
             </div>
             <div class="cs-panel">
               <div class="cs-panel-head">
-                <span>Indexed Query Response &amp; Audit Pipeline</span>
+                <span>Indexed Query Performance &amp; Audit Pipeline</span>
                 <span class="cs-badge">Eager Loading + Cache</span>
               </div>
               <div class="cs-bars">
-                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:42%"></div><span>Payroll</span></div>
-                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:68%"></div><span>Stock</span></div>
-                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:55%"></div><span>RBAC</span></div>
-                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:86%"></div><span>REST API</span></div>
-                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:74%"></div><span>Artisan</span></div>
+                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:46%"></div><span>Stock</span></div>
+                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:72%"></div><span>Billing</span></div>
+                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:58%"></div><span>RBAC</span></div>
+                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:88%"></div><span>REST API</span></div>
+                <div class="cs-bar-col"><div class="cs-bar-fill" style="height:76%"></div><span>Artisan</span></div>
                 <div class="cs-bar-col"><div class="cs-bar-fill" style="height:92%"></div><span>AI Ops</span></div>
               </div>
               <table class="cs-table">
                 <thead><tr><th>Endpoint</th><th>Handler</th><th>Latency</th><th>Status</th></tr></thead>
                 <tbody>
-                  <tr><td>GET /api/v2/hr/attendance</td><td>ServiceProvider</td><td>18 ms</td><td><span class="cs-badge">200 OK</span></td></tr>
-                  <tr><td>POST /api/v2/inventory/sync</td><td>RateLimit + Queue</td><td>24 ms</td><td><span class="cs-badge">Verified</span></td></tr>
+                  <tr><td>GET /api/v2/erp/inventory</td><td>ServiceProvider</td><td>16 ms</td><td><span class="cs-badge">200 OK</span></td></tr>
+                  <tr><td>POST /api/v2/erp/invoices</td><td>RateLimit + Queue</td><td>22 ms</td><td><span class="cs-badge">Verified</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1569,12 +2211,58 @@ body.is-case .nav-case.prev.dim {
         </div>
       </div>
 
-      <!-- Case 2: eCommerce Platform -->
-      <div class="case-slide" data-case="1">
+      <!-- Case 4: HRMS Suite -->
+      <div class="case-slide" data-case="3">
+        <div class="cs-bar">
+          <div class="cs-dots"><i></i><i></i><i></i></div>
+          <div class="cs-url">hrms.workforce-suite.io/payroll/cycle</div>
+          <div class="cs-pill">HRMS • Laravel &amp; Livewire</div>
+        </div>
+        <div class="cs-kpis">
+          <div class="cs-kpi"><small>Active Employees</small><strong>420 Staff</strong></div>
+          <div class="cs-kpi"><small>Attendance Sync</small><strong>96.4%</strong></div>
+          <div class="cs-kpi"><small>Payroll Batch</small><strong>Automated</strong></div>
+        </div>
+        <div class="cs-hrms-grid">
+          <div class="cs-panel">
+            <div>
+              <div class="cs-panel-head">
+                <span>Monthly Payroll Run</span>
+                <span class="cs-badge">88% Disbursed</span>
+              </div>
+              <div class="cs-prog"><i></i></div>
+            </div>
+            <div>
+              <div class="cs-shift-row"><span>Engineering &amp; QA</span><b>142 / 145 Present</b></div>
+              <div class="cs-shift-row"><span>Operations &amp; Support</span><b>118 / 122 Present</b></div>
+              <div class="cs-shift-row"><span>Biometric + Geo Check-in</span><b>Real-Time Sync</b></div>
+              <div class="cs-shift-row" style="border:0"><span>TDS &amp; Payslip PDF</span><b>Generated</b></div>
+            </div>
+          </div>
+          <div class="cs-panel">
+            <div class="cs-panel-head">
+              <span>Leave Approvals &amp; Onboarding Queue</span>
+              <span class="cs-badge">RBAC Workflow</span>
+            </div>
+            <table class="cs-table">
+              <thead><tr><th>Employee</th><th>Module</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>A. Patel — Backend</td><td>Leave Request (2d)</td><td><span class="cs-badge">Approved</span></td></tr>
+                <tr><td>R. Shah — UI/UX</td><td>Shift Roster Sync</td><td><span class="cs-badge">Active</span></td></tr>
+                <tr><td>M. Desai — QA</td><td>Payroll Verification</td><td><span class="cs-badge">Processed</span></td></tr>
+                <tr><td>N. Verma — DevOps</td><td>Onboarding Docs</td><td><span class="cs-badge">Verified</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 5: eCommerce Platform -->
+      <div class="case-slide" data-case="4">
         <div class="cs-bar">
           <div class="cs-dots"><i></i><i></i><i></i></div>
           <div class="cs-url">store.alendei-commerce.io/checkout</div>
-          <div class="cs-pill">React.js • Laravel API</div>
+          <div class="cs-pill">eCommerce • React.js &amp; Laravel</div>
         </div>
         <div class="cs-ecom-grid">
           <div class="cs-main">
@@ -1619,39 +2307,8 @@ body.is-case .nav-case.prev.dim {
         </div>
       </div>
 
-      <!-- Case 3: Ronspot Enterprise SaaS -->
-      <div class="case-slide" data-case="2">
-        <div class="cs-bar">
-          <div class="cs-dots"><i></i><i></i><i></i></div>
-          <div class="cs-url">app.ronspot-saas.com/analytics/ag-grid</div>
-          <div class="cs-pill">Laravel • AG-Grid • AngularJS</div>
-        </div>
-        <div class="cs-main" style="flex:1">
-          <div class="cs-kpis">
-            <div class="cs-kpi"><small>Production Fixes</small><strong>90+ Bugs</strong></div>
-            <div class="cs-kpi"><small>Legacy Migration</small><strong>CI → Laravel</strong></div>
-            <div class="cs-kpi"><small>Data Grid</small><strong>AG-Grid Pro</strong></div>
-          </div>
-          <div class="cs-panel">
-            <div class="cs-panel-head">
-              <span>Enterprise Workspace Allocation Matrix (Livewire + AG-Grid)</span>
-              <div class="cs-tags"><span>iOS / Android REST API</span><span>Filament RBAC</span><span>Agile Sprint</span></div>
-            </div>
-            <table class="cs-table">
-              <thead><tr><th>Workspace Zone</th><th>Module Stack</th><th>Utilization</th><th>API Sync</th><th>Health</th></tr></thead>
-              <tbody>
-                <tr><td>HQ Floor A — Desks</td><td>Laravel API + AG-Grid</td><td>94%</td><td>14 ms</td><td><span class="cs-badge">Active</span></td></tr>
-                <tr><td>EV Parking Bays</td><td>AngularJS + Livewire</td><td>88%</td><td>19 ms</td><td><span class="cs-badge">Synced</span></td></tr>
-                <tr><td>Executive Suites</td><td>Filament Admin + RBAC</td><td>76%</td><td>11 ms</td><td><span class="cs-badge">Verified</span></td></tr>
-                <tr><td>Mobile Client Feeds</td><td>RESTful JSON v3</td><td>99.4%</td><td>22 ms</td><td><span class="cs-badge">Stable</span></td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-
-      <!-- Case 4: Hotel Reservations Platform -->
-      <div class="case-slide" data-case="3">
+      <!-- Case 6: Hotel Reservations Platform -->
+      <div class="case-slide" data-case="5">
         <div class="cs-bar">
           <div class="cs-dots"><i></i><i></i><i></i></div>
           <div class="cs-url">pms.innsight-hospitality.com/yosemite-westgate</div>
@@ -1710,6 +2367,90 @@ body.is-case .nav-case.prev.dim {
         </div>
       </div>
 
+      <!-- Case 7: Gym 3D Website (Own Project) -->
+      <div class="case-slide" data-case="6">
+        <div class="cs-bar">
+          <div class="cs-dots"><i></i><i></i><i></i></div>
+          <div class="cs-url">ironforge-3d.karansinh.dev/studio-scene</div>
+          <div class="cs-pill">TypeScript 97.8% • 3D Web</div>
+        </div>
+        <div class="cs-3d-stage">
+          <div class="cs-3d-viewport">
+            <div style="display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1">
+              <span class="cs-badge">INTERACTIVE 3D GYM EXPERIENCE</span>
+              <span style="font-size:11px;font-weight:700;color:#9fd8bf">60 FPS SCENE</span>
+            </div>
+            <div class="cs-3d-rig">
+              <div class="cs-3d-ring"></div>
+              <div class="cs-3d-cube">3D GYM</div>
+            </div>
+            <div class="cs-3d-grid-floor"></div>
+            <div style="position:relative;z-index:1;display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;color:#cfeee0">
+              <span>CAMERA ORBIT + LIGHTING</span>
+              <span>WORKOUT ZONES</span>
+            </div>
+          </div>
+          <div class="cs-main">
+            <div class="cs-lang-card">
+              <div class="cs-panel-head"><span>Codebase Composition</span><span class="cs-badge">Own Build</span></div>
+              <div class="cs-lang-bar">
+                <div style="width:97.8%;background:#3178c6"></div>
+                <div style="width:1.3%;background:#663399"></div>
+                <div style="width:0.9%;background:#e34c26"></div>
+              </div>
+              <div class="cs-lang-legend">
+                <span><i style="background:#3178c6"></i>TypeScript 97.8%</span>
+                <span><i style="background:#663399"></i>CSS 1.3%</span>
+                <span><i style="background:#e34c26"></i>HTML 0.9%</span>
+              </div>
+            </div>
+            <div class="cs-panel">
+              <div class="cs-panel-head"><span>3D Gym Modules</span><span class="cs-badge">TypeScript</span></div>
+              <table class="cs-table">
+                <thead><tr><th>Feature</th><th>Engine</th><th>State</th></tr></thead>
+                <tbody>
+                  <tr><td>3D Equipment Showcase</td><td>TS Scene Graph</td><td><span class="cs-badge">Interactive</span></td></tr>
+                  <tr><td>Membership &amp; Plans</td><td>Typed State</td><td><span class="cs-badge">Live</span></td></tr>
+                  <tr><td>Trainer &amp; Class Schedule</td><td>Responsive UI</td><td><span class="cs-badge">Active</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case 8: Portfolio Web Design (Live Site Inside Laptop) -->
+      <div class="case-slide is-live-slide" data-case="7">
+        <div class="cs-bar">
+          <div class="cs-dots"><i></i><i></i><i></i></div>
+          <div class="cs-url"><a class="cs-url-link" href="https://karan-portfolio-new.karanalendei123.workers.dev/" target="_blank" rel="noopener noreferrer">karan-portfolio-new.karanalendei123.workers.dev/</a></div>
+          <div class="cs-bar-actions">
+            <div class="cs-pill">HTML 99.3%</div>
+            <a class="cs-open-btn" href="https://karan-portfolio-new.karanalendei123.workers.dev/" target="_blank" rel="noopener noreferrer">Open Live ↗</a>
+          </div>
+        </div>
+        <div class="cs-iframe-wrap">
+          <div class="cs-iframe-loading">Loading live portfolio site…</div>
+          <iframe class="cs-iframe" data-src="https://karan-portfolio-new.karanalendei123.workers.dev/" title="Portfolio Web Design Live Preview" loading="lazy" allow="fullscreen"></iframe>
+        </div>
+      </div>
+
+      <!-- Case 9: Animal Welfare Landing Page (Live Site Inside Laptop) -->
+      <div class="case-slide is-live-slide" data-case="8">
+        <div class="cs-bar">
+          <div class="cs-dots"><i></i><i></i><i></i></div>
+          <div class="cs-url"><a class="cs-url-link" href="https://animal-welfare-website.karanalendei123.workers.dev/#home" target="_blank" rel="noopener noreferrer">animal-welfare-website.karanalendei123.workers.dev/#home</a></div>
+          <div class="cs-bar-actions">
+            <div class="cs-pill">Landing Page</div>
+            <a class="cs-open-btn" href="https://animal-welfare-website.karanalendei123.workers.dev/#home" target="_blank" rel="noopener noreferrer">Open Live ↗</a>
+          </div>
+        </div>
+        <div class="cs-iframe-wrap">
+          <div class="cs-iframe-loading">Loading animal welfare landing page…</div>
+          <iframe class="cs-iframe" data-src="https://animal-welfare-website.karanalendei123.workers.dev/#home" title="Animal Welfare Landing Page Live Preview" loading="lazy" allow="fullscreen"></iframe>
+        </div>
+      </div>
+
       <div class="flash"></div>
     </div>
     <div class="screen-hit" role="button" tabindex="0" aria-label="Next case"></div>
@@ -1753,6 +2494,10 @@ body.is-case .nav-case.prev.dim {
     <div class="k"></div>
     <p></p>
     <div class="num"></div>
+    <a class="case-link" href="#" target="_blank" rel="noopener noreferrer" hidden>
+      <span>Visit Live Site</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10"/></svg>
+    </a>
   </div>
 
   <button type="button" class="nav-case prev">
@@ -1780,7 +2525,7 @@ body.is-case .nav-case.prev.dim {
   <div class="modal-card compact">
     <button type="button" class="modal-close" aria-label="Close contacts">&times;</button>
     <div class="m-head">
-      <img class="m-avatar" src="/assets/aistudio/ChatGPT_Image_Sep_13__2026__04_41_04_PM_77de4dc5.png" alt="Karansinh Padhiyar">
+      <img class="m-avatar" src="/assets/aistudio/Studio_Portrait_in_Green_Crew-Neck_Shirt_3b7090dd.png" alt="Karansinh Padhiyar">
       <div>
         <h2 id="contactsTitle">KARANSINH PADHIYAR</h2>
         <div class="sub">Senior Laravel &amp; PHP Developer • Full Stack Engineer</div>
@@ -1821,20 +2566,20 @@ body.is-case .nav-case.prev.dim {
   <div class="modal-card">
     <button type="button" class="modal-close" aria-label="Close resume">&times;</button>
     <div class="m-head">
-      <img class="m-avatar" src="/assets/aistudio/ChatGPT_Image_Sep_13__2026__04_41_04_PM_77de4dc5.png" alt="Karansinh Padhiyar">
+      <img class="m-avatar" src="/assets/aistudio/Studio_Portrait_in_Green_Crew-Neck_Shirt_3b7090dd.png" alt="Karansinh Padhiyar">
       <div>
         <h2 id="resumeTitle">KARANSINH PADHIYAR</h2>
         <div class="sub">Senior Laravel &amp; PHP Developer | Full Stack Engineer | AI-Enhanced Developer</div>
         <div class="m-actions">
           <a class="m-btn" href="/assets/aistudio/Karansinh_Padhiyar_Resume__2__742917ad.pdf" download="Karansinh_Padhiyar_Resume.pdf">Download Resume PDF</a>
-          <button type="button" class="m-btn alt" id="openProjectsFromResume">View 4 Key Projects</button>
+          <button type="button" class="m-btn alt" id="openProjectsFromResume">View All 9 Projects</button>
         </div>
       </div>
     </div>
 
     <div class="m-sec">
       <h3>Professional Summary</h3>
-      <p class="m-p">Results-driven Full Stack PHP Developer with 5 years of hands-on experience building scalable, secure, and high-performance web applications. Deep expertise in Laravel 11, Core PHP, OOP-based backend architecture, RESTful API development, and MySQL/PostgreSQL optimization. Proven track record of migrating legacy systems, building ERP/CRM/eCommerce modules, resolving 90+ critical production bugs, and integrating payment gateways and third-party APIs. Open to Ahmedabad WFO — immediately available.</p>
+      <p class="m-p">Results-driven Full Stack PHP Developer with 5 years of hands-on experience building scalable, secure, and high-performance web applications across <b>ERP, CRM, HRMS, Parking Management SaaS, eCommerce, and interactive 3D/Portfolio web builds</b>. Deep expertise in Laravel 11, Core PHP, OOP architecture, TypeScript, React.js, RESTful APIs, and MySQL/PostgreSQL optimization. Open to Ahmedabad WFO — immediately available.</p>
     </div>
 
     <div class="m-sec">
@@ -1843,7 +2588,7 @@ body.is-case .nav-case.prev.dim {
         <div class="m-exp-item">
           <h4>Laravel Developer (Contract) — Pirotan Technolabs Pvt. Ltd. <span>Jan 2026 – Mar 2026 • Ahmedabad</span></h4>
           <ul>
-            <li>Architected ERP system modules using Laravel 11 with clean OOP and service provider patterns.</li>
+            <li>Architected ERP &amp; HRMS system modules using Laravel 11 with clean OOP and service provider patterns.</li>
             <li>Designed secure, versioned RESTful APIs with authentication middleware, rate limiting, artisan commands, and seeders.</li>
             <li>Optimized complex MySQL queries via indexing, eager loading, and caching — reduced response time by ~40%.</li>
           </ul>
@@ -1851,7 +2596,7 @@ body.is-case .nav-case.prev.dim {
         <div class="m-exp-item">
           <h4>Frontend + Laravel Developer — Alendei Platforms &amp; Aarya SoftEx LLP <span>Jan 2025 – Nov 2025 • Vadodara</span></h4>
           <ul>
-            <li>Built responsive React.js UIs and scalable Laravel REST APIs/SDKs for product catalog, cart, checkout, and orders.</li>
+            <li>Built responsive React.js UIs and scalable Laravel REST APIs/SDKs for CRM, catalog, cart, checkout, and orders.</li>
             <li>Implemented payment gateway integrations, secure checkout workflows, and lazy loading optimizations.</li>
           </ul>
         </div>
@@ -1859,7 +2604,7 @@ body.is-case .nav-case.prev.dim {
           <h4>PHP Developer — Krayons Technology <span>Oct 2022 – Jan 2025 • Vadodara</span></h4>
           <ul>
             <li>Led production migration from CodeIgniter to Laravel and built Filament admin panels with RBAC.</li>
-            <li>Developed reactive Livewire dashboards, AG-Grid reporting, AngularJS modules (Ronspot SaaS), and resolved 90+ bugs.</li>
+            <li>Built Ronspot Parking &amp; Workspace Management SaaS modules with AngularJS, Livewire dashboards, AG-Grid reporting, and resolved 90+ critical production bugs.</li>
           </ul>
         </div>
         <div class="m-exp-item">
@@ -1878,14 +2623,25 @@ body.is-case .nav-case.prev.dim {
     </div>
 
     <div class="m-sec">
-      <h3>Technical Skills &amp; AI Productivity Stack</h3>
+      <h3>Personal &amp; Featured Projects</h3>
       <div class="m-skills-grid">
+        <div><b>Gym 3D Website (Own Project)</b>Interactive 3D gym studio site — TypeScript 97.8%, CSS 1.3%, HTML 0.9%</div>
+        <div><b>Portfolio Web Design (Own Project)</b>Single-file kinetic hero &amp; laptop dive — HTML 99.3%, Other 0.7% • <a class="m-proj-link" href="https://karan-portfolio-new.karanalendei123.workers.dev/" target="_blank" rel="noopener noreferrer">Live Site ↗</a></div>
+        <div><b>Animal Welfare Landing Page (Own Project)</b>Responsive rescue, adoption &amp; shelter landing page (#home) • <a class="m-proj-link" href="https://animal-welfare-website.karanalendei123.workers.dev/#home" target="_blank" rel="noopener noreferrer">Live Site ↗</a></div>
+        <div><b>SaaS Parking &amp; CRM / ERP / HRMS</b>Ronspot Parking SaaS, Enterprise CRM, Pirotan ERP, Workforce HRMS</div>
+        <div><b>eCommerce &amp; Hospitality PMS</b>Alendei Checkout SDKs &amp; INNsight Yosemite Westgate QR Booking</div>
+      </div>
+    </div>
+
+    <div class="m-sec">
+      <h3>Technical Skills &amp; Core Domains</h3>
+      <div class="m-skills-grid">
+        <div><b>Domain Systems</b>ERP • CRM • HRMS &amp; Payroll • Parking Management SaaS • eCommerce • 3D Gym Web</div>
         <div><b>Backend</b>PHP 8.x • Laravel 11 • Core PHP • CodeIgniter • Node.js • REST APIs • MVC • OOP</div>
-        <div><b>Frontend</b>React.js • JavaScript (ES6+) • jQuery • AJAX • AngularJS • HTML5 • CSS3 • Livewire • SASS</div>
-        <div><b>Database</b>MySQL • PostgreSQL • Database Design • Query Optimization • DDL/DML • PhpMyAdmin</div>
-        <div><b>Integrations &amp; Tools</b>Payment Gateways • Google Maps API • QR Code • Filament • AG-Grid • Git • AWS Basics • Firebase</div>
-        <div><b>AI Stack</b>Claude • ChatGPT • Cursor AI • GitHub Copilot • Windsurf • Perplexity</div>
-        <div><b>Education</b>MCA (First Class, 2017–2019) &amp; BCA (2014–2017) — Veer Narmad South Gujarat University</div>
+        <div><b>Frontend</b>TypeScript • React.js • JavaScript (ES6+) • AngularJS • Livewire • HTML5 • CSS3 • SASS</div>
+        <div><b>Database &amp; BI</b>MySQL • PostgreSQL • Query Optimization • DDL/DML • AG-Grid • Filament • Power BI</div>
+        <div><b>Integrations &amp; Tools</b>Payment Gateways • Google Maps API • QR Code • Git • AWS Basics • Firebase</div>
+        <div><b>AI Stack &amp; Education</b>Claude • ChatGPT • Cursor AI • Copilot • MCA (First Class) &amp; BCA — VNSGU</div>
       </div>
     </div>
 
@@ -1906,17 +2662,35 @@ body.is-case .nav-case.prev.dim {
     plate: HX(CF + 'hf_20261111_001031_a09dc558-2c69-4e05-83a4-5f01ebdd1363.png'),
     casePlate: HX(CF + 'hf_20261111_001031_4a7c3fd9-2168-4219-9736-096a17bbb0e2.png'),
     cut: HX(CF + 'hf_20261111_001143_ec356b1a-50a2-4b50-82fc-e346c914a406.png'),
-    avatar: '/assets/aistudio/ChatGPT_Image_Sep_13__2026__04_41_04_PM_77de4dc5.png',
+    avatar: '/assets/aistudio/Studio_Portrait_in_Green_Crew-Neck_Shirt_3b7090dd.png',
     badge: 'https://images.higgs.ai/?default=1&output=webp&url=' + encodeURIComponent(CF + 'hf_20261111_001143_65c037e6-0768-4b12-9f17-17be132ce16b.png') + '&w=1200&q=85',
     trans: CF + 'hf_20261111_001144_2b054228-95af-41d5-922d-b02979fe485b.mp4'
   };
 
   const CASES = [
     {
-      title: 'ERP MODULES',
+      title: 'SAAS PARKING',
+      rows: ['RONSPOT / KRAYONS TECH', 'SAAS • PARKING MGMT', '2025'],
+      key: '// parking management saas',
+      text: '\u2014 multi-tenant parking & workspace SaaS with live bay booking, EV slots, QR gate passes and AG-Grid analytics.'
+    },
+    {
+      title: 'CRM PLATFORM',
+      rows: ['ENTERPRISE CRM SUITE', 'LARAVEL 11 / REACT.JS', '2025'],
+      key: '// crm pipeline & accounts',
+      text: '\u2014 full-stack CRM with lead-to-deal pipelines, client accounts, automated follow-ups and REST API webhooks.'
+    },
+    {
+      title: 'ERP SYSTEM',
       rows: ['PIROTAN TECHNOLABS', 'LARAVEL 11 / FILAMENT', '2026'],
-      key: '// erp system modules',
-      text: '\u2014 multi-module ERP covering HR workflows, inventory and dashboards with RBAC and ~40% faster MySQL queries.'
+      key: '// enterprise erp system',
+      text: '\u2014 multi-module ERP for inventory, procurement, billing and audit trails with RBAC and ~40% faster MySQL queries.'
+    },
+    {
+      title: 'HRMS SUITE',
+      rows: ['WORKFORCE HRMS', 'LARAVEL 11 / LIVEWIRE', '2026'],
+      key: '// hrms & payroll suite',
+      text: '\u2014 end-to-end HRMS covering onboarding, shift attendance, leave approvals and automated monthly payroll runs.'
     },
     {
       title: 'ECOMMERCE APP',
@@ -1925,16 +2699,32 @@ body.is-case .nav-case.prev.dim {
       text: '\u2014 responsive React.js storefront paired with scalable Laravel REST APIs, SDKs and secure payment checkout.'
     },
     {
-      title: 'RONSPOT SAAS',
-      rows: ['KRAYONS TECHNOLOGY', 'LARAVEL / AG-GRID', '2025'],
-      key: '// ronspot enterprise',
-      text: '\u2014 workspace management SaaS with AG-Grid reporting, Livewire dashboards and 90+ critical production bugs resolved.'
-    },
-    {
       title: 'HOTEL BOOKING',
       rows: ['INNSIGHT HOSPITALITY', 'LARAVEL / QR TRACKING', '2022'],
       key: '// hotel reservations',
       text: '\u2014 multi-property ERP reservation platform for Yosemite Westgate with Endroid QRCode inventory tracking.'
+    },
+    {
+      title: 'GYM 3D WEBSITE',
+      rows: ['OWN PROJECT • 3D WEB', 'TS 97.8% • CSS 1.3% • HTML 0.9%', '2026'],
+      key: '// gym 3d website',
+      text: '\u2014 custom interactive 3D fitness & gym website built primarily in TypeScript (97.8%), CSS (1.3%) and HTML (0.9%).'
+    },
+    {
+      title: 'PORTFOLIO DESIGN',
+      rows: ['OWN PROJECT • WEB DESIGN', 'HTML 99.3% • OTHER 0.7%', '2026'],
+      key: '// portfolio web design',
+      text: '\u2014 bespoke single-file interactive portfolio web design crafted in HTML (99.3%) with custom WAAPI transitions.',
+      url: 'https://karan-portfolio-new.karanalendei123.workers.dev/',
+      urlLabel: 'Open Portfolio'
+    },
+    {
+      title: 'ANIMAL WELFARE',
+      rows: ['OWN PROJECT • LANDING PAGE', 'RESCUE • ADOPTION • CARE', '2026'],
+      key: '// animal welfare landing',
+      text: '\u2014 responsive animal welfare & rescue landing page featuring adoption drives, shelter care programs and donation actions.',
+      url: 'https://animal-welfare-website.karanalendei123.workers.dev/#home',
+      urlLabel: 'Visit Live Site'
     }
   ];
 
@@ -1970,7 +2760,9 @@ body.is-case .nav-case.prev.dim {
   const descKey = desc.querySelector('.k');
   const descText = desc.querySelector('p');
   const descNum = desc.querySelector('.num');
-  const descParts = [descKey, descText, descNum];
+  const descLink = desc.querySelector('.case-link');
+  const descLinkText = descLink.querySelector('span');
+  const descParts = [descKey, descText, descNum, descLink];
   const prevBtn = $('.nav-case.prev');
   const nextBtn = $('.nav-case.next');
 
@@ -2133,12 +2925,28 @@ body.is-case .nav-case.prev.dim {
     descKey.textContent = c.key;
     descText.textContent = c.text;
     descNum.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(CASES.length).padStart(2, '0');
+    if (c.url) {
+      descLink.href = c.url;
+      descLinkText.textContent = c.urlLabel || 'Visit Live Site';
+      descLink.hidden = false;
+    } else {
+      descLink.href = '#';
+      descLink.hidden = true;
+    }
     prevBtn.classList.toggle('dim', i === 0);
   }
 
   function activateSlide(i) {
+    document.body.classList.toggle('has-live', i >= 0 && Boolean(CASES[i] && CASES[i].url));
     caseSlides.forEach((s, idx) => {
-      s.classList.toggle('is-active', idx === i);
+      const on = idx === i;
+      s.classList.toggle('is-active', on);
+      if (on) {
+        const frameEl = s.querySelector('iframe.cs-iframe[data-src]');
+        if (frameEl && !frameEl.getAttribute('src')) {
+          frameEl.setAttribute('src', frameEl.dataset.src);
+        }
+      }
     });
   }
 
